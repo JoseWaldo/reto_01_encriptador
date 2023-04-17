@@ -28,7 +28,8 @@ const encriptar = (e) => {
   let text = inputText.value;
   let longitud = text.length;
   let i = 0;
-  while (i < longitud) {
+
+  for (let i = 0; i < longitud; i++) {
     console.log(i);
     const char = text[i];
     if ("aeiou".indexOf(char) === -1) {
@@ -40,19 +41,6 @@ const encriptar = (e) => {
     i += palabraReemplazo.length;
     longitud = text.length;
   }
-
-  //   for (let i = 0; i < longitud; i++) {
-  //     console.log(i);
-  //     const char = text[i];
-  //     if ("aeiou".indexOf(char) === -1) {
-  //       continue;
-  //     }
-  //     console.log(char);
-  //     const palabraReemplazo = REGLAS_DE_ENCRIPTACION[char];
-  //     text = text.replace(char, palabraReemplazo);
-  //     i += palabraReemplazo.length;
-  //     longitud = text.length;
-  //   }
   console.log(text);
 };
 
