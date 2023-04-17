@@ -14,7 +14,8 @@ const $d = document;
 const inputText = $d.querySelector("#inputText");
 const btnEncriptar = $d.querySelector("#btnEncriptar");
 const btnDesencriptar = $d.querySelector("#btnDesencriptar");
-const inputResult = $d.querySelector("#inputResult");
+const outputResult = $d.querySelector("#outputResult");
+const btnCopyText = $d.querySelector("#copyText");
 
 const REGLAS_DE_ENCRIPTACION = {
   e: "enter",
@@ -24,7 +25,7 @@ const REGLAS_DE_ENCRIPTACION = {
   u: "ufat",
 };
 
-const encriptar = (e) => {
+const encrypt = (e) => {
   e.preventDefault();
   let text = inputText.value;
   let longitud = text.length;
@@ -39,7 +40,15 @@ const encriptar = (e) => {
     i += palabraReemplazo.length - 1;
     longitud = text.length;
   }
-  inputResult.value = text;
+  outputResult.value = text;
 };
 
-btnEncriptar.addEventListener("click", (e) => encriptar(e));
+const copyOutput = (e) => {
+  e.preventDefault();
+  outputResult.select();
+  outputResult.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(outputResult.value);
+};
+
+btnEncriptar.addEventListener("click", (e) => encrypt(e));
+btnCopyText.addEventListener("click", (e) => copyOutput(e));
