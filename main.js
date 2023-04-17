@@ -16,6 +16,7 @@ const btnEncriptar = $d.querySelector("#btnEncriptar");
 const btnDesencriptar = $d.querySelector("#btnDesencriptar");
 const outputResult = $d.querySelector("#outputResult");
 const btnCopyText = $d.querySelector("#copyText");
+const warningMsg = $d.querySelector("#warningMsg");
 
 const REGLAS_DE_ENCRIPTACION = {
   e: "enter",
@@ -48,6 +49,15 @@ const replaceKeytoWord = (posIni, posFin, subcadena, cadena) => {
 const encrypt = (e) => {
   e.preventDefault();
   let cadena = inputText.value;
+
+  if (cadena.length === 0) {
+    const tempWarningMsg = warningMsg.textContent;
+    warningMsg.textContent = "Es necesario un texto para encriptar.";
+    setInterval(() => {
+      warningMsg.textContent = tempWarningMsg;
+    }, 10000);
+  }
+
   let longitud = cadena.length;
   let i = 0;
 
@@ -82,6 +92,15 @@ const copyOutput = (e) => {
 const decrypt = (e) => {
   e.preventDefault();
   let cadena = inputText.value;
+
+  if (cadena.length === 0) {
+    const tempWarningMsg = warningMsg.textContent;
+    warningMsg.textContent = "Es necesario un texto para desencriptar.";
+    setInterval(() => {
+      warningMsg.textContent = tempWarningMsg;
+    }, 10000);
+  }
+
   let longitud = cadena.length;
   let i = 0;
 
