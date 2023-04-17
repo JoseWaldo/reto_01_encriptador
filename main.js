@@ -25,22 +25,51 @@ const REGLAS_DE_ENCRIPTACION = {
   u: "ufat",
 };
 
+const REGLAS_DE_DESENCRIPTACION = {
+  enter: "e",
+  imes: "i",
+  ai: "a",
+  ober: "o",
+  ufat: "u",
+};
+
+const replaceKeytoWord = (posIni, posFin, subcadena, cadena) => {
+  let cadenaIzq;
+  let cadenaDer;
+  let reemplazo;
+  cadenaIzq = cadena.slice(0, posIni);
+  cadenaDer = cadena.slice(posFin);
+  reemplazo = REGLAS_DE_DESENCRIPTACION[subcadena];
+  cadena = cadenaIzq + reemplazo + cadenaDer;
+
+  return cadena;
+};
+
 const encrypt = (e) => {
   e.preventDefault();
-  let text = inputText.value;
-  let longitud = text.length;
+  let cadena = inputText.value;
+  let longitud = cadena.length;
+  let i = 0;
 
-  for (let i = 0; i < longitud; i++) {
-    const char = text[i];
+  while (i <= longitud) {
+    let char = cadena[i];
+
     if ("aeiou".indexOf(char) === -1) {
+      i += 1;
       continue;
     }
+
+    let subCadDer = cadena.substring(i + 1);
+    let subCadIzq = cadena.substring(0, i);
+
     const palabraReemplazo = REGLAS_DE_ENCRIPTACION[char];
-    text = text.replace(char, palabraReemplazo);
-    i += palabraReemplazo.length - 1;
-    longitud = text.length;
+    char = palabraReemplazo;
+    i += palabraReemplazo.length;
+    cadena = subCadIzq + char + subCadDer;
+    longitud = cadena.length;
   }
-  outputResult.value = text;
+
+  outputResult.value = cadena;
 };
 
 const copyOutput = (e) => {
@@ -50,5 +79,33 @@ const copyOutput = (e) => {
   navigator.clipboard.writeText(outputResult.value);
 };
 
+const decrypt = (e) => {
+  e.preventDefault();
+  let cadena = inputText.value;
+  let longitud = cadena.length;
+  let i = 0;
+
+  const keysReglasDesencritacion = Object.keys(REGLAS_DE_DESENCRIPTACION);
+
+  while (i <= longitud) {
+    let subcadena2 = cadena.slice(i, i + 2);
+    let subcadena4 = cadena.slice(i, i + 4);
+    let subcadena5 = cadena.slice(i, i + 5);
+
+    if (keysReglasDesencritacion.includes(subcadena2)) {
+      cadena = replaceKeytoWord(i, i + 2, subcadena2, cadena);
+    } else if (keysReglasDesencritacion.includes(subcadena4)) {
+      cadena = replaceKeytoWord(i, i + 4, subcadena4, cadena);
+    } else if (keysReglasDesencritacion.includes(subcadena5)) {
+      cadena = replaceKeytoWord(i, i + 5, subcadena5, cadena);
+    }
+
+    i += 1;
+  }
+
+  outputResult.value = cadena;
+};
+
 btnEncriptar.addEventListener("click", (e) => encrypt(e));
 btnCopyText.addEventListener("click", (e) => copyOutput(e));
+btnDesencriptar.addEventListener("click", (e) => decrypt(e));
