@@ -90,6 +90,7 @@ const encrypt = (e) => {
 
 const copyOutput = (e) => {
   e.preventDefault();
+  //navigator.clipboard.writeText(outputResult.textContent);
   navigator.clipboard.writeText(outputResult.textContent);
 };
 
