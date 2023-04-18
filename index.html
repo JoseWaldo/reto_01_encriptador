@@ -4,29 +4,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>Encriptador de Texto</title>
 </head>
 <body>
   <main class="container">
     <section class="left-side">
-      <a href="#">
-        <img src="" alt="Logotipo de Alura" srcset="">
+      <a href="#" class="wrapper__logo">
+        <img class="logo"" src="./assets/logo.svg" alt="Logotipo de Alura" srcset="">
       </a>
-      <form>
-        <input type="text" name="" id="inputText" placeholder="Ingrese el texto aquí">
-        <div>
-          <span>[!]</span>
-          <p id="warningMsg">Solo letras minúsculas y sin acentos</p>
-        </div>
-        <section>
-          <button id="btnEncriptar">Encriptar</button>
-          <button id="btnDesencriptar">Desencriptar</button>
+      <form class="form-enc-des">
+        <!-- <input class="input" type="text" name="" id="inputText" placeholder="Ingrese el texto aquí"> -->
+        <textarea class="input" id="inputText" cols="30" rows="10" placeholder="Ingrese el texto aquí"></textarea>
+        <section class="container-warning-buttons"> 
+          <div class="wrapper-warning-msg">
+            <span class="icon-warning icon"></span>
+            <p id="warningMsg">Solo letras minúsculas y sin acentos</p>
+          </div>
+          <button class="btnEnc btn" id="btnEncriptar">Encriptar</button>
+          <button class="btnDes btn" id="btnDesencriptar">Desencriptar</button>
         </section>
       </form>
     </section>
     <section class="right-side">
-      <input type="text" name="" id="outputResult" disabled>
-      <button id="copyText">Copiar</button>
+      <div class="wrapper-output-final wrapper-output">
+        <p class="outputResult" id="outputResult">Respuesta</p>
+        <button class="btnCopy btn" id="copyText">Copiar</button>
+      </div>
+
+      <div class="wrapper-output-init wrapper-output">
+        <img class="wrapper-output-init__img" src="./assets/muñeco.svg" alt="Ilustracion de una persona mirando algo con una lupa">
+        <div class="container__text">
+          <h3>Ningún mensaje fue encontrado</h3>
+          <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+        </div>
+      </div>
     </section>
   </main>
   <script src="main.js"></script>

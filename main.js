@@ -17,6 +17,8 @@ const btnDesencriptar = $d.querySelector("#btnDesencriptar");
 const outputResult = $d.querySelector("#outputResult");
 const btnCopyText = $d.querySelector("#copyText");
 const warningMsg = $d.querySelector("#warningMsg");
+const outputContainerFinal = $d.querySelector(".wrapper-output-final");
+const outputContainerInit = $d.querySelector(".wrapper-output-init");
 
 const REGLAS_DE_ENCRIPTACION = {
   e: "enter",
@@ -56,6 +58,7 @@ const encrypt = (e) => {
     setInterval(() => {
       warningMsg.textContent = tempWarningMsg;
     }, 10000);
+    return;
   }
 
   let longitud = cadena.length;
@@ -79,14 +82,15 @@ const encrypt = (e) => {
     longitud = cadena.length;
   }
 
-  outputResult.value = cadena;
+  outputContainerFinal.style.display = "flex";
+  outputContainerInit.style.display = "none";
+
+  outputResult.textContent = cadena;
 };
 
 const copyOutput = (e) => {
   e.preventDefault();
-  outputResult.select();
-  outputResult.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(outputResult.value);
+  navigator.clipboard.writeText(outputResult.textContent);
 };
 
 const decrypt = (e) => {
@@ -99,6 +103,7 @@ const decrypt = (e) => {
     setInterval(() => {
       warningMsg.textContent = tempWarningMsg;
     }, 10000);
+    return;
   }
 
   let longitud = cadena.length;
@@ -122,7 +127,7 @@ const decrypt = (e) => {
     i += 1;
   }
 
-  outputResult.value = cadena;
+  outputResult.textContent = cadena;
 };
 
 btnEncriptar.addEventListener("click", (e) => encrypt(e));
